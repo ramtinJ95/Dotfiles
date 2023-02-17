@@ -22,7 +22,7 @@ shift + alt - y : yabai -m space --mirror y-axis
 shift + alt - x : yabai -m space --mirror x-axis
 
 # toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+shift + alt - t : yabai -m window --toggle float 
 
 
 # -- Modifying Window Size --
@@ -65,6 +65,15 @@ shift + alt - 5 : yabai -m window --space 5;
 shift + alt - 6 : yabai -m window --space 6;
 shift + alt - 7 : yabai -m window --space 7;
 
+# toggle between vertical and horizontal splits
+cmd + ctrl + alt + shift - x : yabai -m window --toggle split
+
+# -- Shortcuts to launch/focus on my most used apps
+cmd + ctrl + alt + shift - s : open /Applications/Slack.app
+cmd + ctrl + alt + shift - g : open -a "Google Chrome" https://github.com/
+cmd + ctrl + alt + shift - b : open -a "Google Chrome" https://google.com
+cmd + ctrl + alt + shift - o : open -na /Applications/Obsidian.app
+cmd + ctrl + alt + shift - m : open -a /Applications/Spotify.app
 # -- Starting/Stopping/Restarting Yabai --
 
 # stop/start/restart yabai
