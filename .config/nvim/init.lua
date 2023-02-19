@@ -378,9 +378,6 @@ local on_attach = function(_, bufnr)
   nmap("n", "nzzzv")
   nmap("N", "Nzzzv")
 
-  -- Auto adding date for notes in wiki
-  nmap(“<leader>da, :put =strftime(‘%a %Y-%m-%d %H:%M)<CR>”) 
-
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
@@ -399,7 +396,7 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
