@@ -49,8 +49,23 @@ require('packer').startup(function(use)
     'nvim-tree/nvim-web-devicons', -- optional, for file icons
   }
 }
-  -- Practice vim
-  use 'ThePrimeagen/vim-be-good'
+  use {
+    'vimwiki/vimwiki',
+    config = function()
+      vim.g.vimwiki_list = {
+        {
+          path = '~/workspace/Mywiki:',
+          syntax = 'markdown',
+          ext  = '.md',
+        }
+      }
+      vim.g.vimwiki_ext2syntax = {
+        ['.md'] = 'markdown',
+        ['.markdown'] = 'markdown',
+        ['.mdown'] = 'markdown',
+      }
+    end
+  }
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
@@ -99,6 +114,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
   group = packer_group,
   pattern = vim.fn.expand '$MYVIMRC',
+})
+
+local md_line_length = vim.api.nvim_create_augroup('md_line_length', { clear = true })
+vim.api.nvim_create_autocmd({'BufRead','BufNewFile'}, {
+  command = 'setlocal textwidth=80',
+  group = md_line_length,
+  pattern = '*.md',
 })
 
 -- [[ Setting options ]]
@@ -355,6 +377,10 @@ local on_attach = function(_, bufnr)
   nmap("<C-u>", "<C-u>zz")
   nmap("n", "nzzzv")
   nmap("N", "Nzzzv")
+
+  -- Auto adding date for notes in wiki
+  nmap(“<leader>da, :put =strftime(‘%a %Y-%m-%d %H:%M)<CR>”) 
+
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
